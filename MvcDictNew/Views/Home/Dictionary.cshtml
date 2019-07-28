@@ -1,0 +1,110 @@
+﻿@model IEnumerable<MvcDictNew.Models.DictModel>
+
+@{
+    ViewBag.Title = "Dictionary";
+}
+
+<table>
+    <tr>
+        <td><b>Word:</b></td>
+        <td><i>@ViewData["Word"]</i></td>
+    </tr>
+    <tr>
+        <td><b>Definition:</b></td>
+
+        @foreach (var item in Model)
+        {
+            string defStr = "";
+            
+            foreach (var wordDef in item.Def)
+            {
+                if (!defStr.Contains(wordDef))
+                {
+                    defStr = defStr + wordDef + ", ";
+                }
+
+            }
+            
+            defStr = defStr.Substring(0, defStr.Length - 2);
+            @Html.Raw("<td><i>")
+            @Html.DisplayFor(modelitem => defStr)
+            @Html.Raw("</i></td>")
+        }
+    </tr>
+    <tr>
+        <td><b>Synonyms:</b></td>
+
+        @foreach (var item in Model)
+        {
+            string str = "";
+            int count = 0;
+            foreach (var syn in item.Syns)
+            {
+                if (!str.Contains(syn))
+                {
+                    count = count + 1;
+                    str = str + syn + ", ";
+                    if (count > 30)
+                    {
+                        break;
+                    }
+                }
+            }
+
+            str = str.Substring(0, str.Length - 2);
+                
+            @Html.Raw("<td><i>")
+            @Html.DisplayFor(modelitem => str)
+            @Html.Raw("</i></td>")
+        }
+
+    </tr>
+    <tr>
+        <td><b>Antonyms:</b></td>
+
+        @foreach (var item in Model)
+        {
+            string strAnt = "";
+            foreach (var ant in item.Ants)
+            {
+                if (!strAnt.Contains(ant))
+                {
+                    strAnt = strAnt + ant + ", ";
+                }
+            }
+            
+            if (strAnt.Length <= 0)
+            {
+                strAnt = "Antonym not available for this word";
+            }
+            else            
+            {
+                strAnt = strAnt.Substring(0, strAnt.Length - 2);
+            }
+                
+            @Html.Raw("<td><i>")
+            @Html.DisplayFor(modelitem => strAnt)
+            @Html.Raw("</i></td>")
+        
+        }
+
+    </tr>
+    <tr>
+        <td><b>Usage:</b></td>
+        @foreach (var item in Model)
+        {
+            string strUsg = "";
+            strUsg = item.Usage.Sample;
+            strUsg = strUsg.Replace("{it}", "<u>");
+            strUsg = strUsg.Replace("{/it}", "</u>");
+            @Html.Raw("<td><i>")
+            @Html.Raw(strUsg)
+            @Html.Raw("</i></td>")
+        }
+
+    </tr>
+</table>
+<h4>For additional information please visit  <a href="https://www.merriam-webster.com/dictionary/@ViewData["Word"]" target="_blank">https://www.merriam-webster.com/</a></h4>
+
+@Styles.Render("~/Content/css")
+@Scripts.Render("~/bundles/modernizr")

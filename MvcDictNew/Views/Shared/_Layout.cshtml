@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <link href="~/DictImage.png" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    <center>
+        <h1 style="font-family: Algerian; font-size: 40px; color: navy">Webster's WordBook
+        <img id="logo" alt="Logo" src="~/Images/DictImage.png" height="120" width="130" />
+            <div id="caption">(Powered By Merriam-Webster)</div>
+        </h1>  
+    </center>
+    <br />
+    <br />
+    <div id="searchWord">
+        <center>
+            <form method="post" action="@Url.Action("Dictionary", "Home")">
+                <input type="search" name="searchTerm" placeholder="Enter the Word" class="searchBox" />
+                <input type="submit" value="Search" class="searchButton" />
+            </form>
+        </center>
+    </div>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div id="body">
+        @RenderBody()
+    </div>
+    <div id="footer">
+        &copy; API Reference taken from Merriam-Webster - https://dictionaryapi.com in @DateTime.Now.Year
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
