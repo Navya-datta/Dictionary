@@ -27,7 +27,7 @@ namespace MvcDictNew.Controllers
                         
             using(WebClient wc = new WebClient())
             {               
-                    var json = wc.DownloadString("https://dictionaryapi.com/api/v3/references/thesaurus/json/" + myWord + "?key=d393d7c3-957c-49f4-83c1-65c46361f7e0");
+                    var json = wc.DownloadString("https://dictionaryapi.com/api/v3/references/thesaurus/json/" + myWord + "?key=xxxxxxxxx");
 
                     JArray dict = JArray.Parse(json);
 
